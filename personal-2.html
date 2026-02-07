@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>분묘(이장) 분쟁 — 상대방 전략 & 대응 요약</title>
+  <meta name="description" content="분묘(이장) 분쟁에서 상대방(분묘 후손) 측이 취할 수 있는 전략과 이에 대한 대응 포인트를 한눈에 정리한 모바일 웹 페이지">
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.09);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.58);
+      --line:rgba(255,255,255,.12);
+      --ok:#4ade80;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --accent:#60a5fa;
+      --accent2:#a78bfa;
+      --shadow:0 14px 30px rgba(0,0,0,.35);
+      --r:18px;
+      --r2:14px;
+      --maxw:980px;
+      --sans:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 700px at 45% 90%, rgba(74,222,128,.10), transparent 55%),
+        var(--bg);
+    }
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.62));
+      border-bottom:1px solid var(--line);
+    }
+    .bar{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:14px 14px;
+      display:flex; gap:12px;
+      align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:10px; min-width:0}
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(96,165,250,.95), rgba(167,139,250,.9));
+      box-shadow:var(--shadow);
+      position:relative; flex:0 0 auto;
+    }
+    .logo:after{content:""; position:absolute; inset:10px; border-radius:10px; border:1px solid rgba(255,255,255,.35)}
+    h1{margin:0; font-size:15px; letter-spacing:-.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .sub{margin:2px 0 0; font-size:12px; color:var(--muted2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      display:flex; align-items:center; gap:8px;
+      transition:transform .06s ease, background .2s ease, border-color .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18)}
+    .btn:active{transform:scale(.98)}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:18px 14px 94px;}
+    .grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:14px; margin-top:14px;}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.045));
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    h2{margin:0; font-size:14px; letter-spacing:-.2px;}
+    .hd .desc{margin:4px 0 0; font-size:12px; color:var(--muted2); line-height:1.4;}
+    .bd{padding:14px 16px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:3px 8px; border-radius:999px;
+      font-size:11px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .b-ok{ border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.12); color: rgba(220,255,234,.95); }
+    .b-warn{ border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10); color: rgba(255,244,214,.95); }
+    .b-bad{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: rgba(255,221,228,.96); }
+
+    .kpi{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+    @media (max-width: 420px){ .kpi{grid-template-columns:1fr;} }
+    .k{
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+    }
+    .k .t{font-size:11px; color:var(--muted2);}
+    .k .v{margin-top:6px; font-size:13px; line-height:1.35;}
+
+    .row{
+      border:1px solid var(--line);
+      border-radius:var(--r2);
+      background:rgba(255,255,255,.04);
+      padding:12px;
+      margin-bottom:10px;
+    }
+    .row:last-child{margin-bottom:0;}
+    .row h3{
+      margin:0; font-size:13px; letter-spacing:-.2px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .row p{margin:8px 0 0; font-size:12px; color:var(--muted); line-height:1.6;}
+    .row ul{margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:12px; line-height:1.6;}
+    .row li{margin:4px 0;}
+    .divider{height:1px; background:var(--line); margin:12px 0;}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:var(--r2);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px;
+    }
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+      line-height:1.55;
+    }
+    th{
+      text-align:left;
+      color:var(--muted2);
+      background:rgba(255,255,255,.04);
+      font-weight:600;
+    }
+    tr:last-child td{border-bottom:none;}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+    .bottom{
+      position:fixed; left:0; right:0; bottom:0;
+      background: linear-gradient(to top, rgba(11,15,23,.92), rgba(11,15,23,.58));
+      border-top:1px solid var(--line);
+      backdrop-filter: blur(10px);
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      z-index:60;
+    }
+    .bottom .inner{
+      max-width:var(--maxw);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .seg{display:flex; gap:8px; flex-wrap:wrap;}
+    .hint{font-size:11px; color:var(--muted2); text-align:right;}
+
+    @media print{
+      header, .bottom{display:none !important;}
+      body{background:#fff; color:#000;}
+      .card,.row,.k{box-shadow:none !important; background:#fff !important;}
+      table{background:#fff !important;}
+      th{background:#f4f4f4 !important;}
+      .badge{color:#000 !important;}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div style="min-width:0;">
+        <h1>상대방(분묘 후손) 전략 & 대응 요약</h1>
+        <div class="sub">분묘(이장) 분쟁에서 상대 측이 취할 수 있는 공격 포인트를 정리</div>
+      </div>
+    </div>
+    <button class="btn" id="btnPrint" type="button" title="인쇄/저장(PDF)">🖨️ 인쇄</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card" id="secOverview">
+    <div class="hd">
+      <div>
+        <h2>📌 한눈에 보는 결론</h2>
+        <div class="desc">상대는 "현상 유지 / 시간 끌기 / 보상 극대화" 중 하나를 목표로 움직이는 경우가 많습니다.</div>
+      </div>
+      <span class="badge b-ok">실무 관점</span>
+    </div>
+    <div class="bd">
+      <div class="kpi">
+        <div class="k">
+          <div class="t">상대의 3대 목표</div>
+          <div class="v">
+            <span class="badge">현상 유지</span>
+            <span class="badge">시간 끌기</span>
+            <span class="badge">보상 극대화</span>
+          </div>
+        </div>
+        <div class="k">
+          <div class="t">상대가 노리는 프레임</div>
+          <div class="v">
+            <span class="badge b-warn">제사 방해</span>
+            <span class="badge b-warn">권리남용/압박</span>
+            <span class="badge b-warn">공익성 부족</span>
+          </div>
+        </div>
+        <div class="k">
+          <div class="t">가장 강한 공격 카드</div>
+          <div class="v">분묘기지권 성립(특히 장기간 존치·관리 주장)</div>
+        </div>
+        <div class="k">
+          <div class="t">권장 대응 방향</div>
+          <div class="v">감정·금전 갈등 대신 "이용 불가 + 안전/관리 + 객관 증거"로 설득</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <h3>핵심 원칙</h3>
+        <p>
+          분쟁은 "누가 억울한가"보다 "누가 더 합리적·객관적으로 보이는가"가 승부에 큰 영향을 줍니다.
+          상대의 공격 논리를 예상하고, 해당 프레임이 형성되지 않도록 사전 차단하는 방식이 유리합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card" id="secPlaybook">
+      <div class="hd">
+        <div>
+          <h2>🧩 상대방 플레이북(전형적 전개)</h2>
+          <div class="desc">상대(분묘 후손) 측이 실제로 자주 쓰는 주장/증거 패턴</div>
+        </div>
+        <span class="badge b-warn">공격 시나리오</span>
+      </div>
+      <div class="bd">
+
+        <div class="row" id="c1">
+          <h3>1) 분묘기지권 성립 주장 <span class="badge">가장 강력</span></h3>
+          <p><b>주장 요지</b>: 분묘가 장기간 존치했고 평온·공연하게 관리해왔다 → 분묘기지권 성립.</p>
+          <ul>
+            <li><b>증거</b>: 묘지 사진/관리 흔적, 제사 기록, 족보·가족관계 자료, 주변 증인 진술(마을 어르신 등)</li>
+            <li><b>전술</b>: "오래됐다/대대로 관리했다"를 반복하여 사실상 확정 프레임 구축</li>
+          </ul>
+        </div>
+
+        <div class="row" id="c2">
+          <h3>2) 제사·성묘 방해(출입 제한) 역공 <span class="badge b-bad">심증 파괴</span></h3>
+          <p><b>주장 요지</b>: 출입 제한으로 제사·성묘가 방해됨 → 불법행위/위자료.</p>
+          <ul>
+            <li><b>증거</b>: 출입 제한 문구(문자/공지), 녹음, "설·추석만 허용" 등 제한 내용</li>
+            <li><b>전술</b>: 토지주를 "보복/방해"로 보이게 만들어 방어전으로 끌고 감</li>
+          </ul>
+        </div>
+
+        <div class="row" id="c3">
+          <h3>3) 과도한 사용료 청구를 '압박/권리남용'으로 공격</h3>
+          <p><b>주장 요지</b>: 현실적으로 감당 불가한 금전 청구 → 강요·부당 압박(권리남용).</p>
+          <ul>
+            <li><b>증거</b>: 내용증명/통지서, 금액 산정 근거 부재, "하루 단위 고액" 같은 표현</li>
+            <li><b>전술</b>: "돈 받으려는 목적"을 전면에 세워 이장 청구의 정당성을 흔듦</li>
+          </ul>
+        </div>
+
+        <div class="row" id="c4">
+          <h3>4) 공익성·필요성 부족 공격</h3>
+          <p><b>주장 요지</b>: 개발 계획이 확정된 것도 아니고 단순 재산 가치 목적 → 이장은 최후 수단이 아님.</p>
+          <ul>
+            <li><b>증거</b>: 현재 공사/편입 없음, 토지 활용 계획 미비, "불편" 수준이라는 주장</li>
+            <li><b>전술</b>: 토지주 필요성을 '선택적'으로 보이게 만들기</li>
+          </ul>
+        </div>
+
+        <div class="row" id="c5">
+          <h3>5) 집단 분묘(다수 기수) 보호 프레임</h3>
+          <p><b>주장 요지</b>: 다수 분묘는 사회적 보호 필요성이 크다 → 법원도 보수적으로 접근.</p>
+          <ul>
+            <li><b>증거</b>: 기수, 분포도, 마을 관행, 공동 관리 주장</li>
+            <li><b>전술</b>: "사회 통념상 존치가 더 타당"으로 몰아가기</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <aside class="card" id="secDefense">
+      <div class="hd">
+        <div>
+          <h2>🛡️ 대응 전략(프레임 차단)</h2>
+          <div class="desc">상대 주장에 "정면 반박"보다 먼저 "불리한 프레임이 안 생기게" 설계</div>
+        </div>
+        <span class="badge b-ok">방어/대응</span>
+      </div>
+      <div class="bd">
+        <div class="row">
+          <h3>A) 분묘기지권 확정 프레임 대응</h3>
+          <ul>
+            <li>묘 설치 시기 불명확/20년 미만 가능성 남기기</li>
+            <li>관리 부실·방치 정황(사진/영상) 확보</li>
+            <li>무연분묘/관리주체 불명 요소가 있으면 적극 제시</li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h3>B) 제사 방해 공격 차단 <span class="badge b-warn">최우선</span></h3>
+          <ul>
+            <li>출입 제한을 "제사 제한"으로 읽히는 문구는 피하기</li>
+            <li>안전·관리 목적의 조치라면 그 근거(위험/책임)를 함께 정리</li>
+            <li>사실상 전면 차단이 되지 않도록 운영(불필요한 충돌 회피)</li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h3>C) 사용료/패널티 공격 차단</h3>
+          <ul>
+            <li>"하루 단위 고액" 등 압박성 표현은 금물</li>
+            <li>금전 이슈는 소송(이장) 논리와 분리해 '목적이 금전이 아님'을 유지</li>
+            <li>문서/통지서에는 이용 불가·안전·관리 책임 중심의 객관 사정만 담기</li>
+          </ul>
+        </div>
+
+        <div class="row">
+          <h3>D) 공익성·필요성 부족 공격 대응</h3>
+          <ul>
+            <li>미래 개발이 아니라 "현재 이용 불가"를 핵심으로 제시</li>
+            <li>산업단지 인접으로 인한 안전·관리·책임 문제를 구체화</li>
+            <li>부분 존치가 불가능한 구조(진입, 배수, 안전거리 등)를 논리화</li>
+          </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <h3>증거 패키지(필수)</h3>
+          <ul>
+            <li>토지 등기·경계 자료(측량도/지적도)</li>
+            <li>분묘 분포도(지도 위 표시) + 현장 사진</li>
+            <li>토지 이용 계획/불가 사유(진입·배수·경사·안전거리 등)</li>
+            <li>산업단지 인접 자료(공식 문서가 있으면 최상)</li>
+            <li>관리 책임 리스크(제초/화재/붕괴/침하 등) 근거</li>
+            <li>협의 시도 기록(대체 부지 제안 등) — 단, 금전압박 표현은 배제</li>
+          </ul>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <section class="card" id="secTable" style="margin-top:14px;">
+    <div class="hd">
+      <div>
+        <h2>📋 상대 전략 vs 대응 요약 표</h2>
+        <div class="desc">실무에서 많이 쓰는 "한 장짜리" 정리</div>
+      </div>
+      <span class="badge">요약표</span>
+    </div>
+    <div class="bd">
+      <table aria-label="상대 전략과 대응 요약">
+        <thead>
+          <tr>
+            <th style="width:28%;">상대방 전략</th>
+            <th style="width:36%;">상대가 만드는 프레임/증거</th>
+            <th>권장 대응</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>분묘기지권 성립</b></td>
+            <td>장기간 존치·관리, 제사 기록, 증인 진술</td>
+            <td>설치 시기·관리 부실 공격, 무연/관리 불명 정황 확보</td>
+          </tr>
+          <tr>
+            <td><b>제사·성묘 방해 역공</b></td>
+            <td>출입 제한 문구, 녹음, "특정일만 허용" 자료</td>
+            <td><span class="badge b-warn">프레임 차단</span>: 제한 문구/운영 주의, 안전·관리 목적 근거화</td>
+          </tr>
+          <tr>
+            <td><b>과도한 사용료 = 압박</b></td>
+            <td>고액·일단위 금액, 내용증명, "돈 목적" 주장</td>
+            <td>금전 언급 분리/배제, 이장 필요성·객관 사정 중심</td>
+          </tr>
+          <tr>
+            <td><b>필요성 부족 공격</b></td>
+            <td>개발 미확정, 현재 이용 가능 주장</td>
+            <td>"현재 이용 불가" + 안전·관리 책임을 구체적 자료로</td>
+          </tr>
+          <tr>
+            <td><b>집단 분묘 보호</b></td>
+            <td>다수 기수, 공동 관리·관행 주장</td>
+            <td>토지 전역 이용 불가, 부분 존치 불가 논리(진입/배수/안전)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <h3>주의 문구(내부 참고용)</h3>
+        <p>
+          본 문서는 일반적 정보 정리이며, 개별 사건의 사실관계(묘 설치 시기·관리 상태·지자체 규정·공익사업 여부 등)에 따라 결론이 달라질 수 있습니다.
+          실제 소송·문서 발송 전에는 변호사 검토를 권장합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottom" aria-label="빠른 이동">
+  <div class="inner">
+    <div class="seg">
+      <button class="btn" type="button" data-go="#secOverview">📌 개요</button>
+      <button class="btn" type="button" data-go="#secPlaybook">🧩 상대 전략</button>
+      <button class="btn" type="button" data-go="#secDefense">🛡️ 대응</button>
+      <button class="btn" type="button" data-go="#secTable">📋 표</button>
+    </div>
+    <div class="hint">하단 버튼으로 이동 · 상단 인쇄로 PDF 저장 가능</div>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('btnPrint')?.addEventListener('click', () => window.print());
+  document.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sel = btn.getAttribute('data-go');
+      const el = document.querySelector(sel);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
