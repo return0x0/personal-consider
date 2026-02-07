@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>대화 기록 + 소송 전략 정리</title>
+  <meta name="description" content="분묘(이장) 분쟁 관련 대화 기록과 핵심 전략을 모바일 웹 형식으로 정리">
+
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.58);
+      --line: rgba(255,255,255,.12);
+      --ok: #4ade80;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+      --accent: #60a5fa;
+      --accent2: #a78bfa;
+      --shadow: 0 14px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --pad: 16px;
+      --pad2: 12px;
+      --maxw: 940px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(96,165,250,.20), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 700px at 45% 90%, rgba(74,222,128,.10), transparent 55%),
+        var(--bg);
+    }
+    a{ color: inherit; text-decoration: none; }
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 18px 14px 110px;
+    }
+
+    /* Header */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,23,.92), rgba(11,15,23,.62));
+      border-bottom: 1px solid var(--line);
+    }
+    header .bar{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 14px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
+    .logo{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(96,165,250,.95), rgba(167,139,250,.9));
+      box-shadow: var(--shadow);
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .logo:after{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.35);
+    }
+    .brand h1{
+      font-size: 15px;
+      line-height: 1.15;
+      margin: 0;
+      letter-spacing: -.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand p{
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--muted2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .actions{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      flex: 0 0 auto;
+    }
+    .btn{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active{ transform: scale(.98); }
+    .btn:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(255,255,255,.25);
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.045));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card .hd{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card .hd h2{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: -.2px;
+    }
+    .card .hd .sub{
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.4;
+    }
+    .card .bd{ padding: 14px 16px; }
+
+    /* Chat */
+    .chat{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg{
+      display:flex;
+      gap: 10px;
+      align-items:flex-end;
+    }
+    .msg.user{ justify-content: flex-end; }
+    .bubble{
+      max-width: 92%;
+      padding: 12px 12px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+    .user .bubble{
+      background: linear-gradient(135deg, rgba(96,165,250,.28), rgba(167,139,250,.22));
+      border-color: rgba(96,165,250,.25);
+    }
+    .assistant .bubble{
+      background: rgba(255,255,255,.05);
+    }
+    .meta{
+      font-size: 11px;
+      color: var(--muted2);
+      margin: 0 6px 2px;
+      flex: 0 0 auto;
+    }
+    .msg.user .meta{ text-align:right; }
+    .avatar{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .msg.user .avatar{
+      background: rgba(96,165,250,.18);
+      border-color: rgba(96,165,250,.25);
+    }
+
+    /* Lists & badges */
+    .list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .row{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+    }
+    .row h3{
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: -.2px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .row p{
+      margin: 8px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .b-ok{ border-color: rgba(74,222,128,.35); background: rgba(74,222,128,.12); color: rgba(220,255,234,.95); }
+    .b-warn{ border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10); color: rgba(255,244,214,.95); }
+    .b-bad{ border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: rgba(255,221,228,.96); }
+
+    .divider{
+      height: 1px;
+      background: var(--line);
+      margin: 12px 0;
+    }
+
+    details{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.04);
+      padding: 10px 12px;
+    }
+    details summary{
+      cursor: pointer;
+      list-style: none;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-size: 13px;
+      color: var(--text);
+    }
+    details summary::-webkit-details-marker{ display:none; }
+    details .content{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 420px){
+      .kpi{ grid-template-columns: 1fr; }
+    }
+    .k{
+      border: 1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+    }
+    .k .t{
+      font-size: 11px;
+      color: var(--muted2);
+    }
+    .k .v{
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    /* Bottom nav */
+    .bottom{
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to top, rgba(11,15,23,.92), rgba(11,15,23,.58));
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+      z-index: 60;
+    }
+    .bottom .inner{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .seg{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .seg .btn{ padding: 10px 12px; font-size: 12px; }
+    .hint{
+      font-size: 11px;
+      color: var(--muted2);
+      text-align:right;
+    }
+
+    /* Print */
+    @media print{
+      header, .bottom{ display:none !important; }
+      body{ background: #fff; color: #000; }
+      .card, .row, details, .bubble, .k{ box-shadow: none !important; }
+      .card, .row, details, .bubble, .k{ background: #fff !important; }
+      .badge{ color:#000 !important; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div style="min-width:0;">
+        <h1>분묘(이장) 분쟁 — 대화 기록 & 핵심 전략</h1>
+        <p>모바일 웹 요약본 · 대화 내용 포함</p>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="pill"><span class="dot"></span>로컬 HTML</span>
+      <button class="btn" id="btnPrint" type="button" title="인쇄/저장(PDF)">
+        🖨️ 인쇄
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <!-- LEFT: Conversation -->
+    <section class="card" id="secChat">
+      <div class="hd">
+        <div>
+          <h2>🗨️ 나와의 대화(원문 유지)</h2>
+          <div class="sub">아래 내용은 요청대로 대화 흐름을 그대로 살려 정리했습니다.</div>
+        </div>
+        <span class="badge">모바일 채팅 보기</span>
+      </div>
+      <div class="bd">
+        <div class="chat" id="chat">
+          <!-- 1 -->
+          <div class="msg user">
+            <div style="min-width:0;">
+              <div class="meta">사용자</div>
+              <div class="bubble">내가 땅을 가지고 있어. 부모님이 선산을 물려주셨어. 그런데, 앞에 산업단지가 들어와서, 내가 이 땅을 파고 싶어. 문제는 안 15기 정도 되는 묘지가 있다는 거야. 이게 넗게 있어서, 내가 펜스를 쳐버리고 못들어오게 한다고 이야기 했어. 물론 설날이나 추석에 한해 나에게 허락을 구하면, 이동은 하게 해 줄 생각이야. 그리고 27년 1월 부터 1기당 월 5만원씩 사용료를 청구 한다고 편지를 보낸 상태야. 이제 법적으로 해야지.
+
+법적으로 나에게 유리한 판결을 주고, 더 받을 수 있는 방법이 있는지 확잉ㄴ해봐.</div>
+            </div>
+            <div class="avatar" aria-hidden="true">U</div>
+          </div>
+
+          <div class="msg assistant">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div style="min-width:0;">
+              <div class="meta">어시스턴트</div>
+              <div class="bubble">이건 ‘전형적인 분묘기지권 분쟁’이라 법리가 중요합니다. 결론적으로 현재 방식(출입 제한·일방적 사용료 청구)은 리스크가 있고, “더 받는 방법”은 사용료가 아니라 실무적으로는 ‘이장 합의금(보상금)’ 구조가 중심이 됩니다. 사용료 청구는 기각/반환 리스크가 크고, 출입 제한은 제사 방해 프레임으로 손해배상 위험이 있습니다. 가장 유리한 방향은 이장(改葬) 협의·소송 준비(개발 필요성, 이용 불가, 안전/관리 책임 등 증거)입니다.</div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="msg user">
+            <div style="min-width:0;">
+              <div class="meta">사용자</div>
+              <div class="bubble">아니 이장 협의 요청을 해서 내가 20평을 주겠다고 했는데, 돈을 달라는지 거부 하는거야. 내가 부모님께 물려 받은건데 내가 합의금을 줘야 하는이유는 없지. 변호사도 그렇게 이야기 했어. 그러니 나에게 유리한 것으로 다시 검토해.</div>
+            </div>
+            <div class="avatar" aria-hidden="true">U</div>
+          </div>
+
+          <div class="msg assistant">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div style="min-width:0;">
+              <div class="meta">어시스턴트</div>
+              <div class="bubble">당신이 합의금을 “반드시” 줘야 할 법적 의무는 없습니다. 다만 법원은 감정/억울함이 아니라 ‘분묘 존속 보호 필요’와 ‘이장이 불가피한지’를 중심으로 봅니다. 무보상 이장은 가능하나 예외적으로 문턱이 높고(분묘 설치 시기, 토지 이용 불가 정도, 공익성/편입 등) 확률 게임이 됩니다. 유리하게 가려면 금전 목적이 아니라 ‘이용을 위한 불가피한 이장’ 프레임을 유지하면서 이장 청구 소송을 준비해야 합니다. 특히 개발·안전·관리 책임 등 객관 자료를 강하게 쌓는 것이 핵심입니다.</div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="msg user">
+            <div style="min-width:0;">
+              <div class="meta">사용자</div>
+              <div class="bubble">그럼 소송 해야지. 이장 청구를 하고 사용료를 하루 당 몇십만원씩 청구해버리려고해</div>
+            </div>
+            <div class="avatar" aria-hidden="true">U</div>
+          </div>
+
+          <div class="msg assistant">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div style="min-width:0;">
+              <div class="meta">어시스턴트</div>
+              <div class="bubble">“이장 청구 + 하루 단위 고액 사용료 청구”는 당신에게 유리해지기보다 불리해질 가능성이 큽니다. 분묘기지권 분쟁에서 과도한 사용료·압박성 금전청구는 ‘권리남용/부당한 압박’ 프레임으로 비칠 수 있어 이장 청구에도 악영향을 주고, 역으로 손해배상(불법행위) 리스크도 커집니다. 가장 승산을 높이는 구조는 ‘이장 청구 단독’으로 가고, 공익성/이용불가/안전·관리책임 등 합법적 논리와 증거로 설득하는 것입니다.</div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="msg user">
+            <div style="min-width:0;">
+              <div class="meta">사용자</div>
+              <div class="bubble">이것을 잘 보기 좋게 모바일 웹 형식으로 만들어줘. html 파일로</div>
+            </div>
+            <div class="avatar" aria-hidden="true">U</div>
+          </div>
+
+          <div class="msg assistant">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div style="min-width:0;">
+              <div class="meta">어시스턴트</div>
+              <div class="bubble">모바일 웹 형식 HTML을 제공함.</div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="msg user">
+            <div style="min-width:0;">
+              <div class="meta">사용자</div>
+              <div class="bubble">나와의 대화를 다 살려서 해야해</div>
+            </div>
+            <div class="avatar" aria-hidden="true">U</div>
+          </div>
+
+          <div class="msg assistant">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div style="min-width:0;">
+              <div class="meta">어시스턴트</div>
+              <div class="bubble">요청대로 대화 원문을 살려, 대화 기록 + 핵심 전략을 한 화면에서 볼 수 있는 모바일 웹 HTML로 재구성합니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Summary -->
+    <aside class="card" id="secSummary">
+      <div class="hd">
+        <div>
+          <h2>📌 핵심 요약(승산↑ 버전)</h2>
+          <div class="sub">“유리하게 이길 확률”을 높이는 데 필요한 부분만 압축</div>
+        </div>
+        <span class="badge b-ok">실전 중심</span>
+      </div>
+      <div class="bd">
+        <div class="kpi">
+          <div class="k">
+            <div class="t">추천 소송 방향</div>
+            <div class="v"><span class="badge b-ok">이장 청구 ‘단독’</span></div>
+          </div>
+          <div class="k">
+            <div class="t">피해야 할 행동</div>
+            <div class="v"><span class="badge b-bad">고액/일단위 사용료 청구</span></div>
+          </div>
+          <div class="k">
+            <div class="t">핵심 프레임</div>
+            <div class="v">금전 목적 ❌<br/>이용을 위한 불가피한 이장 ⭕</div>
+          </div>
+          <div class="k">
+            <div class="t">결정적 무기</div>
+            <div class="v">공익성·이용불가·안전/관리 책임 자료</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="list">
+          <div class="row">
+            <h3>1) “하루 몇십만 원” 사용료는 왜 불리?</h3>
+            <p>
+              과도한 금전 청구는 <span class="badge b-warn">압박/권리남용 프레임</span>으로 보일 수 있어,
+              이장 청구의 정당성(심증)에 악영향을 줄 수 있습니다. 상황에 따라 역으로 <span class="badge b-bad">불법행위 손해배상</span> 주장도 나올 수 있습니다.
+            </p>
+          </div>
+
+          <div class="row">
+            <h3>2) “돈 안 주고 이장” 가능성은?</h3>
+            <p>
+              의무적으로 합의금을 줘야 하는 건 아니지만, 무보상 이장은 <span class="badge b-warn">문턱이 높습니다</span>.
+              승산을 올리려면 감정 대신 객관 사정(이용 불가, 안전, 공익성/편입, 관리 책임)을 강하게 쌓아야 합니다.
+            </p>
+          </div>
+
+          <div class="row">
+            <h3>3) 당신에게 유리한 소장 구조(요지)</h3>
+            <p>
+              “기존 분묘 존중을 위해 협의(대체 부지 20평 제안)까지 했으나,
+              산업단지 인접 등으로 토지를 사실상 이용할 수 없어 이장이 불가피하다”라는 흐름이 핵심입니다.
+              금전 요구/보복성 문구는 빼고, 증거 중심으로 갑니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <details>
+          <summary>
+            <span>🧾 준비해야 할 증거 체크리스트(눌러서 보기)</span>
+            <span class="badge">열기</span>
+          </summary>
+          <div class="content">- 토지 등기/상속 관련 서류(소유권 명확화)
+- 묘지 위치·규모·분포(지도/드론/사진/측량도)
+- “이용 불가” 입증(계획 도면, 개발 활용 계획, 공사/진입로/배수 등)
+- 산업단지 관련 자료(인접성, 위해·소음·안전·경계)
+- 관리 책임 위험(붕괴·침하·산사태·제초/화재 위험 등)
+- 협의 시도 기록(20평 제공 제안, 협의 요청, 상대의 거부/금전 요구 정황)
+- 향후 공익사업 편입 가능성 자료(가능하면 공식 문서/공문)</div>
+        </details>
+
+        <div style="height:10px;"></div>
+
+        <details>
+          <summary>
+            <span>⚠️ 리스크 경고(현재 계획 중 위험한 부분)</span>
+            <span class="badge b-warn">중요</span>
+          </summary>
+          <div class="content">- 출입 제한을 강하게 하면 ‘제사 방해’로 공격받을 수 있음
+- 일방적·과도한 사용료 청구는 분쟁의 주도권을 상대에게 넘겨줄 수 있음
+- “돈 받아내려는 목적”으로 보이면 이장 청구 심증에 악영향</div>
+        </details>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Optional: Next Steps -->
+  <section class="card" id="secNext" style="margin-top:14px;">
+    <div class="hd">
+      <div>
+        <h2>✅ 다음 액션(현실적인 순서)</h2>
+        <div class="sub">이기기 위해 “지금” 할 일만 정리</div>
+      </div>
+      <span class="badge b-ok">권장 플로우</span>
+    </div>
+    <div class="bd">
+      <div class="list">
+        <div class="row">
+          <h3><span class="badge b-ok">Step 1</span> 사용료/패널티 문구 정리</h3>
+          <p>‘일단위 고액 사용료’ 같은 표현은 소장·내용증명에서 제거하는 게 유리합니다. 이장 필요성 + 객관 사정 중심으로 재정렬.</p>
+        </div>
+        <div class="row">
+          <h3><span class="badge b-ok">Step 2</span> 이장 청구 소송 준비</h3>
+          <p>대화에서 나온 핵심(산업단지 인접, 토지 이용 목적, 20평 제안, 상대의 거부)을 “증거로 연결”하는 작업이 승부처입니다.</p>
+        </div>
+        <div class="row">
+          <h3><span class="badge b-ok">Step 3</span> 증거 패키지로 프레임 고정</h3>
+          <p>금전 갈등이 아니라 “이용 불가로 인한 불가피한 이장”으로 판사 시선을 고정시키는 것이 목적입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Bottom Nav -->
+<nav class="bottom" aria-label="빠른 이동">
+  <div class="inner">
+    <div class="seg">
+      <button class="btn" type="button" data-go="#secChat">🗨️ 대화</button>
+      <button class="btn" type="button" data-go="#secSummary">📌 요약</button>
+      <button class="btn" type="button" data-go="#secNext">✅ 다음 액션</button>
+    </div>
+    <div class="hint">
+      상단 “인쇄”로 PDF 저장 가능
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sel = btn.getAttribute('data-go');
+      const el = document.querySelector(sel);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Print
+  document.getElementById('btnPrint')?.addEventListener('click', () => window.print());
+
+  // Make "열기" badge in details toggle label
+  document.querySelectorAll('details').forEach(d => {
+    const badge = d.querySelector('summary .badge');
+    if (!badge) return;
+    const sync = () => badge.textContent = d.open ? '닫기' : '열기';
+    d.addEventListener('toggle', sync);
+    sync();
+  });
+</script>
+</body>
+</html>
+
