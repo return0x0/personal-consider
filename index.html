@@ -78,6 +78,7 @@
       box-shadow: 0 6px 24px rgba(0,0,0,0.18);
     }
     .tab-btn[data-tab="tab0"].active { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+    .tab-btn[data-tab="tab-reply"].active { background: linear-gradient(135deg, #0369a1, #0ea5e9); }
     .tab-btn[data-tab="tab1"].active { background: linear-gradient(135deg, #2563eb, #3b82f6); }
     .tab-btn[data-tab="tab2"].active { background: linear-gradient(135deg, #059669, #10b981); }
     .tab-btn[data-tab="tab3"].active { background: linear-gradient(135deg, #dc2626, #ef4444); }
@@ -314,6 +315,154 @@
       color: #ca8a04;
     }
 
+    /* ── Reply Letter ── */
+    .reply-card { border-left-color: #0ea5e9; }
+    .reply-card .num { background: linear-gradient(135deg, #0369a1, #0ea5e9); }
+    .reply-card li::before { background: #7dd3fc; }
+
+    .letter-wrap {
+      background: #fffef7;
+      border: 2px solid #d4c89a;
+      border-radius: 14px;
+      padding: 40px 36px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      font-family: 'Nanum Myeongjo', 'Batang', serif;
+      line-height: 2;
+    }
+    .letter-wrap::before {
+      content: '내 용 증 명';
+      display: block;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 8px;
+      color: #1e3a5f;
+      border-bottom: 2px solid #1e3a5f;
+      padding-bottom: 16px;
+      margin-bottom: 28px;
+    }
+    .letter-header {
+      margin-bottom: 24px;
+    }
+    .letter-header table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .letter-header td {
+      padding: 6px 12px;
+      vertical-align: top;
+    }
+    .letter-header .label {
+      font-weight: 700;
+      color: #1e3a5f;
+      width: 80px;
+      white-space: nowrap;
+    }
+    .letter-body {
+      font-size: 0.92rem;
+      color: #1a1a2e;
+    }
+    .letter-body h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1e3a5f;
+      margin: 24px 0 12px;
+      padding-left: 0;
+    }
+    .letter-body p {
+      margin: 8px 0;
+      text-indent: 1em;
+    }
+    .letter-body .clause {
+      margin: 12px 0;
+      padding-left: 1.5em;
+      text-indent: 0;
+    }
+    .letter-body .clause strong {
+      color: #0c4a6e;
+    }
+    .letter-footer {
+      margin-top: 36px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #1e3a5f;
+    }
+    .letter-footer .date {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .letter-footer .sender {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .letter-divider {
+      border: none;
+      border-top: 1px dashed #d4c89a;
+      margin: 20px 0;
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 1px solid #7dd3fc;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .tip-box h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #0c4a6e;
+      margin-bottom: 8px;
+    }
+    .tip-box ul { list-style: none; padding: 0; }
+    .tip-box ul li {
+      position: relative;
+      padding: 4px 0 4px 18px;
+      font-size: 0.88rem;
+      color: #0c4a6e;
+    }
+    .tip-box ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38bdf8;
+    }
+    .summary-sky { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid #7dd3fc; }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #0369a1, #0ea5e9);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 12px;
+    }
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(14,165,233,0.3);
+    }
+    .copy-btn.copied {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    @media (max-width: 600px) {
+      .letter-wrap { padding: 24px 18px; }
+      .letter-wrap::before { font-size: 1.05rem; letter-spacing: 4px; }
+    }
+
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -341,6 +490,7 @@
 <!-- ═══════════════ TAB NAV ═══════════════ -->
 <nav class="tab-nav">
   <button class="tab-btn active" data-tab="tab0">내용증명 반박</button>
+  <button class="tab-btn" data-tab="tab-reply">회신 내용증명 예시</button>
   <button class="tab-btn" data-tab="tab1">산소주 입장</button>
   <button class="tab-btn" data-tab="tab2">토지소유자 입장</button>
   <button class="tab-btn" data-tab="tab3">토지소유자 법적 문제점</button>
@@ -516,6 +666,124 @@
 
   </div>
 
+  <!-- ──── TAB REPLY: 회신 내용증명 예시 ──── -->
+  <div id="tab-reply" class="tab-panel">
+
+    <!-- 안내 -->
+    <div class="card reply-card">
+      <h2 style="color:#0369a1;">회신 내용증명 예시</h2>
+      <div class="summary-box summary-sky">
+        <p>아래는 토지소유자가 보낸 내용증명(2026.1.27)에 대해 분묘 연고자 입장에서 <strong>회신할 수 있는 내용증명 예시</strong>입니다. 실제 발송 전 반드시 <strong>변호사의 검토</strong>를 받으시기 바랍니다.</p>
+      </div>
+    </div>
+
+    <!-- 내용증명 본문 -->
+    <div class="card reply-card" style="padding: 16px;">
+      <div class="letter-wrap" id="letter-content">
+
+        <div class="letter-header">
+          <table>
+            <tr><td class="label">수 신 인</td><td>신재명 (고등리 산563-6 토지 소유자)</td></tr>
+            <tr><td class="label">주    소</td><td>(수신인 주소 기재)</td></tr>
+            <tr><td colspan="2"><hr class="letter-divider"></td></tr>
+            <tr><td class="label">발 신 인</td><td>신중화, 신창재 외 분묘 연고자 일동</td></tr>
+            <tr><td class="label">주    소</td><td>(발신인 주소 기재)</td></tr>
+          </table>
+        </div>
+
+        <div class="letter-body">
+
+          <h3>제 목 : 귀하의 2026년 1월 27일자 통보에 대한 회신</h3>
+
+          <p>귀하께서 2026년 1월 27일자로 발송하신 내용증명을 수령하였기에, 이에 대하여 다음과 같이 회신합니다.</p>
+
+          <h3>1. 이장 요구에 대하여</h3>
+
+          <p>귀하께서는 "조건 없이 산소를 이장바랍니다"라고 통보하셨으나, 해당 분묘들은 설치된 후 <strong>20년 이상 평온·공연하게 존속</strong>하여 왔으므로, 관습법상 <strong>분묘기지권</strong>이 성립되어 있습니다(대법원 2002다1178 판결 참조).</p>
+
+          <p>분묘기지권은 <strong>물권(物權)</strong>으로서 법적 보호를 받으며, 토지소유자의 일방적인 통보만으로 이장 의무가 발생하지 않습니다. 이장을 구하시려면 <strong>법원에 이장청구 소송</strong>을 제기하여 승소 판결을 받으셔야 하며, 이 경우에도 토지 이용이 현저히 곤란하다는 사정 등이 입증되어야 합니다(대법원 96다44778 판결 참조).</p>
+
+          <p class="clause"><strong>따라서, 귀하의 일방적 이장 요구에는 응할 수 없음을 통보드립니다.</strong></p>
+
+          <h3>2. 토지사용료 청구에 대하여</h3>
+
+          <p>귀하께서는 "산소 1기당 월 50,000원의 토지사용료를 납부하라"고 하셨으나, 분묘기지권이 성립한 경우 그 사용권은 <strong>무상(無償)</strong>입니다. 대법원은 분묘기지권자에 대하여 토지소유자가 지료나 사용료를 청구할 수 없다고 명확히 판시한 바 있습니다(대법원 2013다17292 판결 참조).</p>
+
+          <p class="clause"><strong>따라서, 법적 근거 없는 사용료 청구에는 응할 수 없으며, 향후에도 사용료를 납부할 의사가 없음을 분명히 합니다.</strong></p>
+
+          <h3>3. 출입 금지 및 통행료 징수에 대하여</h3>
+
+          <p>귀하께서는 "외부인 출입을 금지하며, 출입 시 허가서 제출 및 통행료를 납부하라"고 하셨습니다. 그러나 분묘기지권에는 분묘의 수호·관리를 위한 <strong>출입권</strong>이 당연히 포함되어 있으며(대법원 1995다14083 판결 참조), 성묘·벌초·제사 등을 위한 출입을 금지하거나 이에 대하여 별도의 통행료를 징수하는 것은 법적 근거가 없습니다.</p>
+
+          <p>특히 출입 허가서 제출 및 사전 허가제를 요구하는 것은 분묘기지권의 행사를 실질적으로 봉쇄하는 행위로, <strong>민법 제750조에 의한 불법행위</strong>에 해당할 수 있음을 알려드립니다.</p>
+
+          <p class="clause"><strong>따라서, 출입 허가 절차 및 통행료 요구에는 응할 수 없으며, 향후 성묘·제사 등을 위한 출입권을 정당하게 행사할 것임을 통보드립니다.</strong></p>
+
+          <h3>4. 펜스 설치에 대하여</h3>
+
+          <p>귀하의 토지에 펜스를 설치하는 것은 소유권의 행사로 가능하나, 펜스 설치로 인하여 분묘로의 <strong>출입 통로가 차단</strong>되는 경우에는 분묘기지권 침해에 해당합니다. 펜스를 설치하시더라도 분묘 연고자의 출입이 가능한 통로를 확보해 주시기 바랍니다.</p>
+
+          <p class="clause"><strong>만약 출입 통로가 확보되지 않을 경우, 방해배제청구 등 법적 조치를 취할 수밖에 없음을 미리 알려드립니다.</strong></p>
+
+          <h3>5. 결론</h3>
+
+          <p>이상과 같이, 귀하의 2026년 1월 27일자 내용증명에 기재된 요구사항들은 분묘기지권이 성립한 본건 분묘에 대하여 <strong>법적 근거가 없는 것</strong>이므로, 이에 응할 수 없음을 재차 통보드립니다.</p>
+
+          <p>귀하께서 분묘의 이장, 사용료, 출입 제한 등에 관하여 이견이 있으시다면, <strong>법원을 통하여 정당한 절차로 권리를 행사</strong>하여 주시기 바랍니다.</p>
+
+          <p>본 분묘 연고자들도 향후 발생할 수 있는 권리 침해에 대비하여 법률 전문가와 상의하여 적절한 조치를 취할 예정임을 알려드립니다.</p>
+
+        </div>
+
+        <div class="letter-footer">
+          <p class="date">2026년     월     일</p>
+          <hr class="letter-divider">
+          <p class="sender">발신인 : 신중화, 신창재 외 분묘 연고자 일동</p>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:20px;">
+        <button class="copy-btn" onclick="copyLetter()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          내용증명 텍스트 복사
+        </button>
+      </div>
+    </div>
+
+    <!-- 발송 안내 -->
+    <div class="card reply-card">
+      <h2><span class="num" style="background:linear-gradient(135deg,#0369a1,#0ea5e9);">!</span> 내용증명 발송 방법</h2>
+      <div class="tip-box">
+        <h4>우체국 내용증명 발송 절차</h4>
+        <ul>
+          <li><strong>준비물:</strong> 같은 내용의 문서 3통 (발신인 보관용, 수신인 발송용, 우체국 보관용)</li>
+          <li><strong>장소:</strong> 가까운 우체국 방문</li>
+          <li><strong>비용:</strong> 약 5,000~10,000원 (등기료 포함)</li>
+          <li>내용증명은 <strong>"이 내용을 이 날짜에 보냈다"는 사실만 증명</strong>하는 것이므로 부담 없이 발송 가능</li>
+        </ul>
+      </div>
+      <div class="tip-box" style="margin-top:12px;">
+        <h4>발송 전 체크리스트</h4>
+        <ul>
+          <li>발신인·수신인의 <strong>이름, 주소</strong>를 정확히 기재</li>
+          <li>발송 전 <strong>변호사 검토</strong>를 받으면 더욱 안전</li>
+          <li>발송 후 <strong>발신인 보관용 사본</strong>과 <strong>등기 영수증</strong>을 반드시 보관</li>
+          <li>추후 분쟁 시 <strong>증거 자료</strong>로 활용 가능</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 주의사항 -->
+    <div class="card reply-card" style="border-left-color:#f59e0b;">
+      <h2 style="color:#d97706;">주의사항</h2>
+      <div class="summary-box" style="background:linear-gradient(135deg,#fffbeb,#fef3c7); border:1px solid #fde68a;">
+        <p style="color:#92400e;">위 내용증명은 <strong>예시</strong>이며, 실제 상황에 맞게 수정이 필요합니다. 특히 분묘의 정확한 기수, 설치 시기, 연고자 관계 등 <strong>구체적 사실관계</strong>를 확인한 후 작성하시기 바랍니다. 법적 분쟁의 가능성이 있으므로 <strong>반드시 변호사와 상담</strong> 후 발송하시는 것을 강력히 권장합니다.</p>
+      </div>
+    </div>
+
+  </div>
+
   <!-- ──── TAB 1: 산소주 입장 ──── -->
   <div id="tab1" class="tab-panel">
 
@@ -673,6 +941,20 @@
       document.getElementById(btn.dataset.tab).classList.add('active');
     });
   });
+
+  function copyLetter() {
+    const el = document.getElementById('letter-content');
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.classList.add('copied');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> 복사 완료!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> 내용증명 텍스트 복사';
+      }, 2000);
+    });
+  }
 </script>
 </body>
 </html>
