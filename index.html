@@ -50,12 +50,55 @@
       background:rgba(96,165,250,.12);
       color:rgba(200,225,255,.95);
     }
+    .badge-green{
+      border:1px solid rgba(74,222,128,.35);
+      background:rgba(74,222,128,.12);
+      color:rgba(220,255,234,.95);
+    }
+    .badge-amber{
+      border:1px solid rgba(251,191,36,.35);
+      background:rgba(251,191,36,.10);
+      color:rgba(255,244,214,.95);
+    }
+    .badge-pink{
+      border:1px solid rgba(251,113,133,.35);
+      background:rgba(251,113,133,.10);
+      color:rgba(255,221,228,.96);
+    }
+    .disabled{
+      opacity:.45;
+      pointer-events:none;
+    }
+    .disabled .badge::after{
+      content:" (준비중)";
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>분묘(이장) 분쟁 정리</h1>
     <p class="sub">문서를 선택하세요</p>
+
+    <a class="card" href="personal-1.html">
+      <span class="badge">채팅 로그</span>
+      <h2>AI 대화 기록 + 소송 전략</h2>
+      <p>분묘(이장) 분쟁 관련 대화 원문과 핵심 전략을 채팅 형식으로 정리</p>
+    </a>
+
+    <a class="card" href="personal-2.html">
+      <span class="badge badge-pink">분묘주 입장</span>
+      <h2>분묘기지권 보유 후손 측 전략</h2>
+      <p>분묘기지권을 가진 분묘주(후손) 입장에서의 공격 전략과 이에 대한 대응 포인트</p>
+    </a>
+
+    <a class="card disabled" href="personal-3.html">
+      <span class="badge badge-green">땅 주인 입장</span>
+      <h2>토지 소유자 측 전략</h2>
+      <p>땅 주인(토지 소유자) 입장에서의 이장 청구 전략과 증거 준비 가이드</p>
+    </a>
+  </div>
+</body>
+</html>
 
     <a class="card" href="personal-1.html">
       <span class="badge">문서 1</span>
